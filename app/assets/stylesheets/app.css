@@ -1,0 +1,7 @@
+*:focus {
+  outline: none;
+  
+}
+input:-internal-autofill-selected {
+  background-color: none;
+}
