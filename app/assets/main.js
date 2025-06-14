@@ -1,2 +1,6 @@
+import * as Turbo from "@hotwired/turbo";
+import "./controllers";
 import "./stylesheets/tailwind.css";
-console.log("hello world!");
+
+window.Turbo = Turbo;
+
