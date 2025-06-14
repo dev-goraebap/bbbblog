@@ -62,3 +62,5 @@ gem "kaminari", "~> 1.2", ">= 1.2.2"
 gem "phlex-rails", "~> 2.2"
 # 사이트맵 생성 라이브러리
 gem "sitemap_generator"
+# 이미지 처리
+gem "image_processing", ">= 1.2"
