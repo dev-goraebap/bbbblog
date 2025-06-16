@@ -12,5 +12,7 @@ Rails.application.routes.draw do
       get "content", to: "content"
       get "lazy-content", to: "lazy_content"
     end
+
+    get "upload-box/test", to: "upload_box_test#index"
   end
 end
