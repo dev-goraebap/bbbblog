@@ -7,4 +7,9 @@ class Lab::ModalTestController < ApplicationController
   def content
     render "lab/modal_test/content", layout: "modal"
   end
+
+  def lazy_content
+    sleep(0.8)
+    render "lab/modal_test/content", layout: "modal"
+  end
 end

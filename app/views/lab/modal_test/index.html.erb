@@ -9,10 +9,20 @@
     단점: 모달UI까지 서버에서 랜더링하므로 CSR하는것 보다 모달이 사용자에게 보여지기까지 딜레이가 있음.<br/>
     받아올 데이터가 크면 클 수록 채감이 많이 됨
   </p>
-  <a
-    href="/lab/modal/content"
-    data-turbo-frame="modal_frame"
-    class="btn btn-primary">
-    모달 열기
-  </a>
+
+  <div class="flex gap-4">
+    <a
+      href="/lab/modal/content"
+      data-turbo-frame="modal_frame"
+      class="btn btn-primary">
+      모달 열기
+    </a>
+    <a
+      href="/lab/modal/lazy-content"
+      data-turbo-frame="modal_frame"
+      class="btn btn-warning">
+      조금 느린 모달 열기
+    </a>
+  </div>
+
 </div>
