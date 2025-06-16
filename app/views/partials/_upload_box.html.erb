@@ -37,23 +37,33 @@
 
   <!-- 이미지 미리보기 박스 -->
   <template data-upload-box-target="previewItemTemplate">
-    <div class="flex gap-2 justify-between items-center">
-      <div class="bg-primary w-16 h-10">
-        <img x-data="img" alt="preview image">
+    <div class="flex gap-2 justify-start items-center">
+      <div class="bg-neutral-content w-16 h-10 min-w-16 min-h-10 max-w-16 max-h-10 overflow-hidden">
+        <img x-data="img" alt="preview image" class="w-full h-full">
       </div>
       <div class="overflow-hidden">
         <p x-data="name" class="text-sm text-neutral truncate whitespace-nowrap">
           <!-- upload-file-name.jpg -->
         </p>
-        <p x-data="size" class="text-xs text-neutral/50">
-          <!-- 760,000 MB -->
-        </p>
+        <div class="flex gap-2 text-xs text-neutral/50">
+          <span x-data="size">
+            <!-- 760,000 MB -->
+          </span>
+          <span x-data="type">
+            <!-- IMAGE/JPG -->
+          </span>
+        </div>
       </div>
-      <button>
-        <svg class="size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </button>
     </div>
+  </template>
+
+  <!-- 초기화 버튼 -->
+  <template data-upload-box-target="clearButtonTemplate">
+    <button
+      data-action="upload-box#onClear"
+      type="button" 
+      class="btn btn-soft btn-warning text-xs">
+      초기화
+    </button>
   </template>
 </div>
