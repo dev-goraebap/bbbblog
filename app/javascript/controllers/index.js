@@ -5,7 +5,9 @@
 import { application } from "./application";
 
 import HelloController from "./hello_controller";
-import { ModalController } from "./modal/modal_controller";
+import { CsrModalController } from "./modal/csr_modal_controller";
+import { SsrModalController } from "./modal/ssr_modal_controller";
 
 application.register("hello", HelloController);
-application.register("modal", ModalController);
+application.register("ssr-modal", SsrModalController);
+application.register("csr-modal", CsrModalController);

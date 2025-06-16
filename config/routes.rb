@@ -2,8 +2,15 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :lab, module: "lab" do
-    get "modal/test", to: "modal_test#index"
-    get "modal/content", to: "modal_test#content"
-    get "modal/lazy-content", to: "modal_test#lazy_content"
+    namespace :modal, module: "modal_test" do
+      get "test", to: "index"
+      get "content", to: "content"
+      get "lazy-content", to: "lazy_content"
+    end
+    namespace :modal2, module: "modal_test2" do
+      get "test", to: "index"
+      get "content", to: "content"
+      get "lazy-content", to: "lazy_content"
+    end
   end
 end

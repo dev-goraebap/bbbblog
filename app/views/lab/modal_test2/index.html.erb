@@ -1,0 +1,32 @@
+<div class="p-10 prose-sm">
+  <h1 class="font-bold">모달: 방법2</h1>
+  <p>
+    stimulus를 이용하여 클라이언트측에서 모달UI를 빠르게 랜더링. 내부 컨텐츠는 비동기 통신으로 데이터를 받아오기<br/>
+    중요한 점은 프론트엔드 프레임워크처럼 json으로 데이터를 받아오는게 아니라는점. (부분 html을 받아옴)<br/>
+    프론트엔드 프레임워크가 지원하는 jsx 등의 html 하이라이팅 등의 지원을 받을 수 없어서 이 방식을 사용하게 되면 자바스크립트에서<br/>
+    innerHTML 또는 createElement API 를 사용해야하는 처참한 상황을 피해갈 수 없음.<br/>
+    이부분을 turbo frame의 도움으로 프레임 영역에 받아온 html을 그대로 주입하기 할 수 있기 때문에 js에서 dom을 조작하지 않아도됨<br/>
+    모달 UI 또한 template태그를 통해 미리 마크업해두고 (이 경우 template 껍대기를 벗기기 전까지는 안보임) 사용하거나,<br>
+    css 스타일을 토클하는 등의 방법을 사용하여 js에서 dom을 직접 조작하는 것을 피해야하는 것을 다시한번 강조..
+  </p>
+  <p class="text-success">장점: 서버 통신속도와 상관없이 모달UI를 즉각적으로 노출. 더 익숙한 사용자 경험이라고 생각</p>
+  <p class="text-warning">
+    단점: 조금 더 작성해야할게 많아진 stimulus (이정도면 재밌는 수준이긴함)<br/>
+    hotwired의 철학에 익숙하지 않아서 이 방법을 생각하기까지 오래걸림..
+  </p>
+
+  <div class="flex gap-4">
+    <button
+      data-action="csr-modal#onOpen"
+      data-api="/lab/modal2/content"
+      class="btn btn-primary">
+      모달 열기
+    </button>
+    <button
+      data-action="csr-modal#onOpen"
+      data-api="/lab/modal2/lazy-content"
+      class="btn btn-warning">
+      조금 느린 모달 열기
+    </button>
+  </div>
+</div>

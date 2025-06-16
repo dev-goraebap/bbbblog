@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-export class ModalController extends Controller {
+export class SsrModalController extends Controller {
 
   static targets = ["closeBtn","backdrop"];
 
