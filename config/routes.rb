@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     get "modal-v2/content", to: "modal_v2#content"
     get "modal-v2/lazy-content", to: "modal_v2#lazy_content"
 
+    get "flash", to: "flash#index"
+    post "flash/success", to: "flash#success"
+    post "flash/failure", to: "flash#failure"
+
     get "image-preview", to: "image_preview#index"
     get "image-preview-v2", to: "image_preview_v2#index"
 
