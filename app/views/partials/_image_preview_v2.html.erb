@@ -1,5 +1,6 @@
 <%
   # 파라미터
+  name = local_assigns[:name] || "files"
   isMultiple = local_assigns[:isMultiple] || false
 %>
 
@@ -26,7 +27,8 @@
     <input
       data-image-preview-v2-target="fileInput"
       data-action="image-preview-v2#onChange"
-      type="file" 
+      name="<%= name %>"
+      type="file"
       class="hidden"
       accept="image/*"
       <%= isMultiple ? 'multiple' : '' %>
