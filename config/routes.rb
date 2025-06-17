@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root "home#index"
 
   namespace :lab, module: "lab" do
+    root "index"
+
     get "modal", to: "modal#index"
     get "modal/content", to: "modal#content"
     get "modal/lazy-content", to: "modal#lazy_content"

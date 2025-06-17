@@ -1,4 +1,4 @@
-class Lab::ImageUploadsController < ApplicationController
+class Lab::ImageUploadsController < LabController
   def index
     @test_objects = TestObject.order(created_at: :desc)
   end

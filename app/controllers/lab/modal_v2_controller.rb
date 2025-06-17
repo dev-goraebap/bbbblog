@@ -1,4 +1,4 @@
-class Lab::ModalV2Controller < ApplicationController
+class Lab::ModalV2Controller < LabController
   def index
     render "lab/modal_v2/index"
   end
