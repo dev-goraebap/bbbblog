@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     get "flash", to: "flash#index"
     post "flash/success", to: "flash#success"
     post "flash/failure", to: "flash#failure"
+    get "flash-v2", to: "flash_v2#index"
+    post "flash-v2/success", to: "flash_v2#success"
+    post "flash-v2/failure", to: "flash_v2#failure"
 
     get "image-preview", to: "image_preview#index"
     get "image-preview-v2", to: "image_preview_v2#index"

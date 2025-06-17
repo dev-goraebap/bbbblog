@@ -3,6 +3,7 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application";
+import { FlashController } from "./flash_controller";
 
 import HelloController from "./hello_controller";
 import { ImagePreviewController } from "./image_preview/image_preview_controller";
@@ -17,3 +18,4 @@ application.register("csr-modal", CsrModalController);
 application.register("upload-box", UploadBoxController);
 application.register("image-preview", ImagePreviewController);
 application.register("image-preview-v2", ImagePreviewV2Controller);
+application.register("flash", FlashController);
