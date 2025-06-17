@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     get "modal-v2/lazy-content", to: "modal_v2#lazy_content"
 
     get "image-preview", to: "image_preview#index"
+    get "image-preview-v2", to: "image_preview_v2#index"
   end
 end
