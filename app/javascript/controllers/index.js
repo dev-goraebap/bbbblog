@@ -5,6 +5,7 @@
 import { application } from "./application";
 
 import HelloController from "./hello_controller";
+import { ImagePreviewController } from "./image_preview/image_preview_controller";
 import { CsrModalController } from "./modal/csr_modal_controller";
 import { SsrModalController } from "./modal/ssr_modal_controller";
 import { UploadBoxController } from "./upload_box/upload_box_controller";
@@ -13,3 +14,4 @@ application.register("hello", HelloController);
 application.register("ssr-modal", SsrModalController);
 application.register("csr-modal", CsrModalController);
 application.register("upload-box", UploadBoxController);
+application.register("image-preview", ImagePreviewController);
