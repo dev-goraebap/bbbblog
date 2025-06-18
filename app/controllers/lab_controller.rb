@@ -2,6 +2,6 @@ class LabController < ApplicationController
   layout "lab"
   
   def index
-    render "lab/index"
+    render Views::Lab::Index.new
   end
 end

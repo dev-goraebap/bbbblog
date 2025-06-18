@@ -1,13 +1,16 @@
 class Lab::ImageUploadsController < LabController
   def index
-    @test_objects = TestObject.order(created_at: :desc)
+    test_objects = TestObject.order(created_at: :desc)
+    render Views::Lab::ImageUploads::Index.new(test_objects: test_objects)
   end
 
   def show
-    @test_object = TestObject.find(params[:id])
+    test_object = TestObject.find(params[:id])
+    render Views::Lab::ImageUploads::Show.new(test_object: test_object)
   end
 
   def new
+    render Views::Lab::ImageUploads::New.new
   end
 
   def create

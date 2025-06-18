@@ -2,6 +2,7 @@ class Lab::FlashController < LabController
   # rails에서 성공시 notice, 실패시 alert 명명을 사용하는 관례가 있음
 
   def index
+    render Views::Lab::Flash::Index.new
   end
 
   def success

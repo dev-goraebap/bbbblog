@@ -1,5 +1,5 @@
 class Lab::ImagePreviewV2Controller < LabController
   def index
-    render "lab/image_preview_v2/index"
+    render Views::Lab::ImagePreviewV2::Index.new
   end
 end
