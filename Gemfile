@@ -63,3 +63,4 @@ group :test do
 end
 
 gem "image_processing", ">= 1.2"
+gem "google-cloud-vision"
