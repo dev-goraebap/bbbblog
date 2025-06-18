@@ -1,5 +1,4 @@
 class Views::Lab::ImageUploads::Show < Views::Base
-
   def initialize(test_object: nil)
     @test_object = test_object
   end
@@ -7,12 +6,12 @@ class Views::Lab::ImageUploads::Show < Views::Base
   def view_template
     div(class: "flex flex-col gap-4") do
       a(href: "/lab/image-uploads") { "뒤로가기" }
-      
+
       div(class: "flex flex-col gap-4 bg-base-100") do
         p(class: "text-2xl") do
           plain "##{@test_object.name}"
         end
-        
+
         div(class: "flex flex-col gap-2") do
           @test_object.images.each do |image|
             # 이미지 컴포넌트 렌더링
@@ -23,7 +22,7 @@ class Views::Lab::ImageUploads::Show < Views::Base
               height: "h-36",
               alt: @test_object.name
             )
-            
+
             # 이미지 객체 정보 출력
             pre do
               code do
@@ -32,6 +31,16 @@ class Views::Lab::ImageUploads::Show < Views::Base
             end
           end
         end
+      end
+
+      div do
+        a(
+          href: "/lab/image-uploads/#{@test_object.id}",
+          data: {
+            turbo_method: "delete"
+          },
+          class: "text-error-content"
+        ) { "삭제하기" }
       end
     end
   end

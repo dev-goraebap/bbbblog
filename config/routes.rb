@@ -26,5 +26,6 @@ Rails.application.routes.draw do
     get "image-uploads/new", to: "image_uploads#new"
     get "image-uploads/:id", to: "image_uploads#show"
     post "image-uploads", to: "image_uploads#create"
+    delete "image-uploads/:id", to: "image_uploads#destroy"
   end
 end
