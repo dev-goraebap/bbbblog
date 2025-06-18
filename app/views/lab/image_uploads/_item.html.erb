@@ -6,7 +6,12 @@
   <p class="text-2xl">#<%= test_object.name %></p>
   <div class="flex gap-2">
     <% test_object.images.each do |image| %>
-      <img src="<%= rails_blob_url(image) %>" class="w-20 object-contain"/>
+      <%= render "partials/image",  
+        url: url_for(image),
+        dominant_color: image.blob.metadata["dominant_color"],
+        width: "w-36",
+        height: "h-36",
+        alt: test_object.name %>
     <% end %>
   </div>
 </a>
