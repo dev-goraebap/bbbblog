@@ -26,7 +26,7 @@ class Views::Lab::ImageUploads::Show < Views::Base
             # 이미지 객체 정보 출력
             pre do
               code do
-                plain image.inspect
+                plain image.blob.inspect
               end
             end
           end

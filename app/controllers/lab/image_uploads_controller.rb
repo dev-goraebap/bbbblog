@@ -52,12 +52,18 @@ class Lab::ImageUploadsController < LabController
     end
   end
 
+  def edit
+    test_object = TestObject.find(params[:id])
+    render Views::Lab::ImageUploads::Edit.new(test_object: test_object)
+  end
+
+  def update
+    test_object = TestObject.find(params[:id])
+    redirect_to "/lab/image-uploads/#{params[:id]}/edit"
+  end
+
   def destroy
     test_object = TestObject.find(params[:id])
-
-    if test_object.nil?
-      return redirect_to "/lab/image-uploads", alert: "게시물을 찾을 수 없습니다."
-    end
 
     if test_object.destroy
       redirect_to "/lab/image-uploads", notice: "게시물이 삭제되었습니다"

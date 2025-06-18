@@ -9,6 +9,7 @@ import HelloController from "./hello_controller";
 import { ImageLoaderController } from "./image_loader_controller";
 import { ImagePreviewController } from "./image_preview/image_preview_controller";
 import { ImagePreviewV2Controller } from "./image_preview/image_preview_v2_controller";
+import { ImageUploaderController } from "./image_uploader_controller";
 import { CsrModalController } from "./modal/csr_modal_controller";
 import { SsrModalController } from "./modal/ssr_modal_controller";
 
@@ -21,3 +22,4 @@ application.register("flash", FlashController);
 application.register("image-preview", ImagePreviewController);
 application.register("image-preview-v2", ImagePreviewV2Controller);
 application.register("image-loader", ImageLoaderController);
+application.register("image-uploader", ImageUploaderController);

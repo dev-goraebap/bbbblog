@@ -6,7 +6,7 @@ class Views::Lab::ImageUploads::Item < Views::Base
   def view_template
     a(
       href: "/lab/image-uploads/#{@test_object.id}",
-      class: "flex flex-col gap-4 bg-base-100 p-4 border border-neutral/50"
+      class: "flex flex-col gap-4 bg-base-100 p-4 border-t border-neutral/50"
     ) do
       p(class: "text-2xl") do
         plain "##{@test_object.name}"
