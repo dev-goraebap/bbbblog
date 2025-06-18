@@ -6,16 +6,18 @@ import { application } from "./application";
 import { FlashController } from "./flash_controller";
 
 import HelloController from "./hello_controller";
+import { ImageLoaderController } from "./image_loader_controller";
 import { ImagePreviewController } from "./image_preview/image_preview_controller";
 import { ImagePreviewV2Controller } from "./image_preview/image_preview_v2_controller";
 import { CsrModalController } from "./modal/csr_modal_controller";
 import { SsrModalController } from "./modal/ssr_modal_controller";
-import { UploadBoxController } from "./upload_box/upload_box_controller";
 
 application.register("hello", HelloController);
 application.register("ssr-modal", SsrModalController);
 application.register("csr-modal", CsrModalController);
-application.register("upload-box", UploadBoxController);
+
+application.register("flash", FlashController);
+
 application.register("image-preview", ImagePreviewController);
 application.register("image-preview-v2", ImagePreviewV2Controller);
-application.register("flash", FlashController);
+application.register("image-loader", ImageLoaderController);
