@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_21_102824) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_21_104732) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_102824) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "post_tags", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id", "tag_id"], name: "index_post_tags_on_post_id_and_tag_id", unique: true
+    t.index ["post_id"], name: "index_post_tags_on_post_id"
+    t.index ["tag_id"], name: "index_post_tags_on_tag_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -55,6 +65,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_102824) do
     t.index ["status"], name: "index_posts_on_status"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+    t.index ["slug"], name: "index_tags_on_slug", unique: true
+  end
+
   create_table "test_objects", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -63,4 +83,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_102824) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "post_tags", "posts"
+  add_foreign_key "post_tags", "tags"
 end
