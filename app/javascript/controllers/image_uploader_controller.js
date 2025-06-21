@@ -90,7 +90,7 @@ export class ImageUploaderController extends Controller {
     const removeInputEl =
       this.removeIdInputTemplateTarget.content.cloneNode(true);
     const id = e.currentTarget.dataset.id;
-    removeInputEl.value = id;
+    removeInputEl.querySelector('input').setAttribute('value', id);
     this.element.appendChild(removeInputEl);
     this.element.querySelector(`#preview_item_${id}`)?.remove();
   }

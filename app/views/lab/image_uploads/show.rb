@@ -33,13 +33,17 @@ class Views::Lab::ImageUploads::Show < Views::Base
         end
       end
 
-      div do
+      div(class: "flex gap-4") do
+        a(
+          href: "/lab/image-uploads/#{@test_object.id}/edit",
+          class: "text-warning"
+        ) { "수정하기" }
         a(
           href: "/lab/image-uploads/#{@test_object.id}",
           data: {
             turbo_method: "delete"
           },
-          class: "text-error-content"
+          class: "text-error"
         ) { "삭제하기" }
       end
     end

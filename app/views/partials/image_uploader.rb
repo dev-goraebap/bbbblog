@@ -1,9 +1,11 @@
 class Views::Partials::ImageUploader < Views::Base
   def initialize(
     # 업로드된 이미지 데이터가 있을경우 사용됨
-    uploaded_images: []
+    uploaded_images: [],
+    input_name: ""
   )
     @uploaded_images = uploaded_images
+    @input_name = input_name
   end
 
   def view_template
@@ -30,7 +32,7 @@ class Views::Partials::ImageUploader < Views::Base
           class: "hidden",
           type: "file",
           multiple: "true",
-          name: "added_files",
+          name: @input_name,
           accept: "image/*")
       end
 
@@ -115,7 +117,7 @@ class Views::Partials::ImageUploader < Views::Base
 
   def csr_remove_id_input_template
     template(data: { image_uploader_target: "removeIdInputTemplate" }) do
-      input(name: "removeFileIds[]", class: "hidden")
+      input(name: "remove_file_ids[]", class: "hidden")
     end
   end
 end

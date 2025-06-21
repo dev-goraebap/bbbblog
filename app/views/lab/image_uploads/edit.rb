@@ -7,8 +7,10 @@ class Views::Lab::ImageUploads::Edit < Views::Base
     div(class: "flex flex-col gap-4") do
       h1(class: "font-bold text-3xl") { "이미지 업로드 수정" }
 
+      render Views::Partials::Flash.new(version: "v2")
+
       form(
-        action: "/lab/image-uploads",
+        action: "/lab/image-uploads/#{@test_object.id}",
         method: "put",
         enctype: "multipart/form-data",
         class: "flex flex-col items-start gap-4"
@@ -19,7 +21,10 @@ class Views::Lab::ImageUploads::Edit < Views::Base
         end
 
         div(class: "w-[300px]") do
-          render Views::Partials::ImageUploader.new(uploaded_images: @test_object.images)
+          render Views::Partials::ImageUploader.new(
+            uploaded_images: @test_object.images,
+            input_name: "test_object[images][]"
+          )
         end
 
         button(class: "btn btn-primary") { "업로드" }

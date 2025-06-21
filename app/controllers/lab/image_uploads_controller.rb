@@ -17,34 +17,15 @@ class Lab::ImageUploadsController < LabController
     @test_object = TestObject.new(test_object_params)
 
     if @test_object.save
-      # 저장 후 이미지마다 대표색상 추출 및 저장
+      # 저장 후 이미지마다 대표색상 추출 작업을 백그라운드로 전환
       if @test_object.images.attached?
         @test_object.images.each do |image|
-          # 분석이 완료될 때까지 기다림
-          image.analyze if !image.analyzed?
-
-          # 이미지 열기
-          image.blob.open do |file|
-            # 색상 추출
-            colors = GoogleVision.extract_colors(file)
-            # 첫 번째 색상의 hex만 메타데이터로 저장
-            if colors.present? && colors.first.present?
-              dominant_color = colors.first[:hex]
-
-              # 현재 blob에서 직접 메타데이터 가져오기
-              current_metadata = ActiveStorage::Blob.find(image.blob.id).metadata
-
-              # 새 메타데이터를 기존 메타데이터와 병합
-              new_metadata = current_metadata.merge("dominant_color" => dominant_color)
-
-              # 안전하게 메타데이터 업데이트 (직접 SQL 업데이트)
-              image.blob.update_column(:metadata, new_metadata)
-            end
-          end
+          # 각 이미지에 대한 색상 추출을 백그라운드 작업으로 예약
+          ExtractDominantColorJob.perform_later(image.id)
         end
       end
 
-      flash[:notice] = "이미지 업로드 성공! 파일 개수: #{@test_object.images.count}"
+      flash[:notice] = "이미지 업로드 성공! 파일 개수: #{@test_object.images.count}. 이미지 처리는 백그라운드에서 계속됩니다."
       redirect_to "/lab/image-uploads"
     else
       flash[:alert] = "이미지 업로드 실패! #{@test_object.errors.full_messages.to_sentence}"
@@ -58,8 +39,47 @@ class Lab::ImageUploadsController < LabController
   end
 
   def update
-    test_object = TestObject.find(params[:id])
-    redirect_to "/lab/image-uploads/#{params[:id]}/edit"
+    @test_object = TestObject.find(params[:id])
+    remove_ids = params[:remove_file_ids] || []
+
+    # 1. 제거할 이미지 처리
+    if remove_ids.present?
+      remove_ids.each do |blob_id|
+        attachment = ActiveStorage::Attachment
+          .joins(:blob)
+          .where(record: @test_object,
+            record_type: "TestObject",
+            name: "images",
+            blob_id: blob_id)
+          .first
+
+        attachment&.purge_later
+      end
+    end
+
+    # 2. 이름 업데이트
+    @test_object.name = test_object_params[:name] if test_object_params[:name].present?
+    @test_object.save
+
+    # 3. 새 이미지 추가 처리
+    if test_object_params[:images].present?
+      test_object_params[:images].each do |image|
+        @test_object.images.attach(image)
+
+        # 새로 첨부된 이미지의 메타데이터 처리는 백그라운드 작업으로 전환
+        # 메타데이터 처리를 위해 ID만 전달
+        attachment_id = @test_object.images.last.id
+        ExtractDominantColorJob.perform_later(attachment_id)
+      end
+    end
+
+    flash[:notice] = "이미지가 성공적으로 업데이트되었습니다. 이미지 처리는 백그라운드에서 계속됩니다."
+    redirect_to "/lab/image-uploads/#{@test_object.id}"
+
+  rescue => e
+    Rails.logger.error "업데이트 실패: #{e.message}"
+    flash[:alert] = "업데이트 실패: #{e.message}"
+    redirect_to "/lab/image-uploads/#{@test_object.id}/edit"
   end
 
   def destroy
