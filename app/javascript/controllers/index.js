@@ -12,6 +12,7 @@ import { ImagePreviewV2Controller } from "./image_preview/image_preview_v2_contr
 import { ImageUploaderController } from "./image_uploader_controller";
 import { CsrModalController } from "./modal/csr_modal_controller";
 import { SsrModalController } from "./modal/ssr_modal_controller";
+import { TinymceController } from "./tinymce_controller";
 
 application.register("hello", HelloController);
 application.register("ssr-modal", SsrModalController);
@@ -23,3 +24,4 @@ application.register("image-preview", ImagePreviewController);
 application.register("image-preview-v2", ImagePreviewV2Controller);
 application.register("image-loader", ImageLoaderController);
 application.register("image-uploader", ImageUploaderController);
+application.register("tiny-mce", TinymceController);
