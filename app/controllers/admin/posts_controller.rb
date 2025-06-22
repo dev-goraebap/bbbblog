@@ -11,12 +11,14 @@ class Admin::PostsController < AdminController
 
   def new
     post = Post.new
-    render Views::Admin::Posts::New.new(post: post), layout: "post_form"
+    tags = Tag.order(:name).all
+    render Views::Admin::Posts::New.new(post: post, tags: tags), layout: "post_form"
   end
 
   def edit
     post = Post.find(params.expect(:id))
-    render Views::Admin::Posts::Edit.new(post: post), layout: "post_form"
+    tags = Tag.order(:name).all
+    render Views::Admin::Posts::Edit.new(post: post, tags: tags), layout: "post_form"
   end
 
   def create
@@ -27,7 +29,12 @@ class Admin::PostsController < AdminController
         format.html { redirect_to [ :admin, post ], notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: post }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        tags = Tag.order(:name).all
+        format.html {
+          render Views::Admin::Posts::New.new(post: post, tags: tags),
+                layout: "post_form",
+                status: :unprocessable_entity
+        }
         format.json { render json: post.errors, status: :unprocessable_entity }
       end
     end
@@ -40,7 +47,12 @@ class Admin::PostsController < AdminController
         format.html { redirect_to [ :admin, post ], notice: "Post was successfully updated." }
         format.json { render :show, status: :ok, location: post }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        tags = Tag.order(:name).all
+        format.html {
+          render Views::Admin::Posts::Edit.new(post: post, tags: tags),
+                layout: "post_form",
+                status: :unprocessable_entity
+        }
         format.json { render json: post.errors, status: :unprocessable_entity }
       end
     end
@@ -58,7 +70,9 @@ class Admin::PostsController < AdminController
 
   private
 
-    def post_params
-      params.expect(post: [ :title, :body ])
-    end
+  def post_params
+    params.require(:post).permit(:title, :body, :status, :published_at, :slug,
+                                :description, :reading_time, :tag_names,
+                                tag_ids: [])
+  end
 end
